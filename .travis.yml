@@ -9,7 +9,8 @@ install:
   - go get -u golang.org/x/tools/cmd/goimports
 
 script:
-  - go get -d -t ./...
+  - export GO111MODULE=on
+  - go vet ./...
   - go test ./...
   - >
     goimports -d -e ./ | grep '.*' && { echo; echo "Aborting due to non-empty goimports output."; exit 1; } || :
